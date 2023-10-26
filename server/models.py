@@ -9,12 +9,27 @@ class User( db.Model, SerializerMixin):
     __tablename__ ="user_table"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False, unique=True)
+    user = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
 
     closet = db.relationship('Closet', backref='user')
     history = db.relationship('History', backref='user')
+
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(
+            password.encode('utf-8')
+        )
+        self._password_hash = password_hash.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(
+            self._password_hash, password.encode('utf-8')
+        )
 
 #////////////////////////////////////////////////
 class Event( db.Model, SerializerMixin):
@@ -65,21 +80,7 @@ class History(db.Model, SerializerMixin):
 #/////////////////////////////////////////////////////////////////////
 #Password
 
-    @hybrid_property
-    def password_hash(self):
-        return self._password_hash
-    
-    @password_hash.setter
-    def password_hash(self, password):
-        password_hash = bcrypt.generate_password_hash(
-            password.encode('utf-8')
-        )
-        self._password_hash = password_hash.decode('utf-8')
-
-    def authenticate(self, password):
-        return bcrypt.check_password_hash(
-            self._password_hash, password.encode('utf-8')
-        )
+   
 
 
 

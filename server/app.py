@@ -12,14 +12,17 @@ app.json_as_ascii = False
 db.init_app(app)
 migrate = Migrate(app, db)
 api = Api(app)
+#////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 #////////////////////////////////////////////////////////////////////////////////////////////
 class Login(Resource):
     def post(self):
         data = request.get_json()
-        username= data['username']
+        user= data['user']
         password= data['password']
-        user = User.query.filter(User.username == username).first()
+        user = User.query.filter(User.user == user).first()
         if user:
             if user.authenticate(password):
                 session['user_id'] = user.id
@@ -32,7 +35,7 @@ class CheckSession(Resource):
     def get(self):
         user = User.query.filter(User.id == session.get('user_id')).first()
         if user:
-            return user.to_dict(only=('username', 'id'))
+            return user.to_dict(only=('user', 'id'))
         else:
             return {'message': 'Not Authorized'}, 401
 
@@ -42,18 +45,21 @@ class Logout(Resource):
         return {}, 204
 
 #////////////////////////////////////////////////////////////////////////////////////////////
-class User(Resource):
+class User_Route(Resource):
     def get(self):
         users = [user.to_dict() for user in User.query.all()]
         return make_response(users, 200)
 
     def post(self):
         data = request.get_json()
+        # name = data["name"]
+        # password = data["password"]
+     
         try:
+            print(data["name"])
             new_user = User(
-                name=data['name'],
-                email=data['email'],
-                _password_hash=data['password_hash']
+                user=data["name"],
+                password_hash=data["password"]
             )
             db.session.add(new_user)
             db.session.commit()
@@ -77,8 +83,8 @@ class UserByID(Resource):
         data = request.get_json()
         if 'name' in data:
             user.name = data['name']
-        if 'email' in data:
-            user.email = data['email']
+        if 'user' in data:
+            user.user = data['user']
         if '_password_hash' in data:
             user._password_hash = data['_password_hash']
 
@@ -291,7 +297,7 @@ class HistoryByID(Resource):
 
 #////////////////////////////////////////////////////////////////////////////////////////////
 
-api.add_resource(User, '/users')
+api.add_resource(User_Route, '/users')
 api.add_resource(UserByID, '/users/<int:id>')
 api.add_resource(Event, '/events')
 api.add_resource(EventByID, '/events/<int:id>')
