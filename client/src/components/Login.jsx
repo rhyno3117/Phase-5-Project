@@ -130,7 +130,7 @@ function Login() {
                 </Button>
                 <Grid container display={'flex'} justifyContent={'space-between'} margin={'0 auto'}>
                   <Grid item>
-                    <Button style={{ textAlign: 'center', width: '100%' }} onClick={() => navigate('/signup')}>
+                    <Button style={{ marginLeft: '100px' }} onClick={() => navigate('/signup')}>
                       Don't have an account?
                     </Button>
                   </Grid>

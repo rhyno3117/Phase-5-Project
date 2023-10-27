@@ -7,7 +7,6 @@ import Signup from './components/Signup';
 import MainPage from './components/MainPage';
 import UploadCloset from './components/UploadCloset';
 
-
 function App() {
   return (
     <BrowserRouter>

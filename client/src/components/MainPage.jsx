@@ -17,15 +17,17 @@ function IconHandshake(props) {
 
 function MainPage() {
   const [weatherData, setWeatherData] = useState(null);
-
+console.log(weatherData)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = fetch(
-          `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lon}&appid=701c7923ab44b10c557127d6bf4e9e47`
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=Denver&appid=c82d5efadbe37e6a719e4c9825b64b6b&units=metric`
         );
+        console.log(response)
         if (response.ok) {
-          const data = response.json();
+          const data = await response.json();
+          console.log(data);
           setWeatherData(data);
         } else {
           console.error('Failed to fetch weather data');
@@ -40,13 +42,15 @@ function MainPage() {
   }, []);
 
   return (
+    <>
+    
     <div
       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        height: '100vh',
+        // height: '100vh',
         width: '100vw',
         margin: 'auto',
         padding: 'auto',
@@ -89,7 +93,6 @@ function MainPage() {
             width: '500%',
             height: '85px',
             background: 'black',
-            zIndex: -1,
             marginLeft: '-750px',
           }}
         ></span>
@@ -104,26 +107,31 @@ function MainPage() {
             width: '500%',
             height: '85px',
             background: 'black',
-            zIndex: -1,
             marginRight: '-750px',
+
           }}
         ></span>
       </Link>
-      <div>
+      
+    </div>
+    <div>
         <div
           style={{
             margin: '10px',
             justifyContent: 'flex-start',
-            padding: '145px',
-            border: '1px solid #ccc',
+            padding: '120px',
+            border: '4px solid #000',
             backgroundColor: '#f9f9f9',
             height: '400px',
-            marginRight: '1150px',
+            width: '100px',
+            textAlign: 'left',
+            alignItems: 'left',
+            marginRight: '1450px',
           }}
         >
           {weatherData ? (
             <div>
-              <h2>Weather Data</h2>
+              <h2 style={{textAlign: 'center', borderBottom: '1px solid #000', color: 'black'  }}>Weather</h2>
               <p>Temperature: {weatherData.main.temp}°C</p>
               <p>Humidity: {weatherData.main.humidity}%</p>
             </div>
@@ -132,7 +140,8 @@ function MainPage() {
           )}
         </div>
       </div>
-    </div>
+    </>
+
   );
 }
 

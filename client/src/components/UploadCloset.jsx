@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import UploadFitBigBox from './UploadFitBigBox';
+import { Outlet } from 'react-router-dom';
 
 function IconHandshake(props) {
   return (
@@ -15,21 +16,22 @@ function IconHandshake(props) {
 }
 
 function UploadCloset() {
+  const words = ['Tops', 'Bottoms', 'Lower', 'Socks', 'Shoes', 'Accessories'];
+
   return (
     <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-start',  // Set this property to 'flex-start'
-      height: '100vh',
-      width: '100vw',
-      margin: 'auto',
-      padding: 'auto',
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        height: '100vh',
+        width: '100vw',
+        margin: 'auto',
+        padding: 'auto',
       }}
     >
-      <Link
-        to="/login"
+      <div
         id="starterLogo"
         style={{
           display: 'flex',
@@ -39,11 +41,13 @@ function UploadCloset() {
           textDecoration: 'none',
           position: 'relative',
           margin: '0',
+          marginBottom: '20px', // Add margin at the bottom
         }}
       >
         <IconHandshake style={{ fontSize: '3em', margin: '0' }} />
         <p
           style={{
+            display: 'flex',
             marginBottom: '0',
             fontWeight: 'bold',
             fontFamily: 'Arial, sans-serif',
@@ -57,22 +61,24 @@ function UploadCloset() {
         <span
           className="line-left"
           style={{
+            display: 'flex',
             content: '',
             position: 'absolute',
             top: '50%',
             left: '0',
             transform: 'translateY(-50%)',
             width: '500%',
-            height: '85px',  // Increase the height for thicker lines
+            height: '85px',
             background: 'black',
             zIndex: -1,
-            marginLeft: '-750px', // Move the line outside the border
+            marginLeft: '-750px',
           }}
         ></span>
         <span
           className="line-right"
           style={{
             content: '',
+            display: 'flex',
             position: 'absolute',
             top: '50%',
             right: '0',
@@ -84,7 +90,55 @@ function UploadCloset() {
             marginRight: '-750px',
           }}
         ></span>
-      </Link>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          height: '100vh',
+          width: '100vw',
+          marginTop: '10px', // Add margin at the top
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
+        >
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              style={{
+                marginTop: '50px', // Add margin at the bottom of boxes
+                padding: '20px',
+                width: '100px',
+                height: '0px',
+                margin: '15px',
+                backgroundColor: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '1em',
+                color: 'black',
+                border: '2px solid black',
+              }}
+            >
+              {words[index]}
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <UploadFitBigBox />
+
+      <div style={{ marginBottom: '100px' }}>
+      </div>
+      
     </div>
   );
 }
