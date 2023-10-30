@@ -56,10 +56,7 @@ class Clothes( db.Model, SerializerMixin):
     __tablename__ ="clothes_table"
 
     id = db.Column(db.Integer, primary_key=True)
-    clothes_id = db.Column(db.Integer)
-    max_temp = db.Column(db.Integer)
-    mid_temp = db.Column(db.Integer)
-    color = db.Column(db.String)
+    category = db.Column(db.String)
     season = db.Column(db.Integer)
 
     closet = db.relationship('Closet', backref='clothes')
