@@ -57,7 +57,8 @@ class Clothes( db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String)
-    season = db.Column(db.Integer)
+    season = db.Column(db.String)
+    image = db.Column(db.String)
 
     closet = db.relationship('Closet', backref='clothes')
     History = db.relationship('History', backref='clothes')

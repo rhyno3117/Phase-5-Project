@@ -20,7 +20,7 @@ api = Api(app)
 class Login(Resource):
     def post(self):
         data = request.get_json()
-        user= data['user']
+        user= data['username']
         password= data['password']
         user = User.query.filter(User.user == user).first()
         if user:
@@ -63,6 +63,8 @@ class User_Route(Resource):
             )
             db.session.add(new_user)
             db.session.commit()
+            session['user_id'] = new_user.id
+
             return make_response(new_user.to_dict(), 201)
         except ValueError:
             db.session.rollback()
@@ -81,12 +83,10 @@ class UserByID(Resource):
             return {"message": "User not found"}, 404
 
         data = request.get_json()
-        if 'name' in data:
-            user.name = data['name']
-        if 'user' in data:
-            user.user = data['user']
-        if '_password_hash' in data:
-            user._password_hash = data['_password_hash']
+        if 'username' in data:
+            user.user = data['username']
+        if 'password' in data:
+            user._password_hash = data['password']
 
         db.session.commit()
         return user.to_dict(), 200
@@ -193,20 +193,20 @@ class ClosetByID(Resource):
         return make_response({'message': 'Closet not found'}, 404)
     
 #////////////////////////////////////////////////////////////////////////////////////////////
-class Clothes(Resource):
+class ClothesResource(Resource):
     def get(self):
         clothes = [cloth.to_dict() for cloth in Clothes.query.all()]
         return make_response(clothes, 200)
 
     def post(self):
         data = request.get_json()
+        print(data['picture'])
+
         try:
             new_clothes = Clothes(
-                clothes_id=data['clothes_id'],
-                max_temp=data['max_temp'],
-                mid_temp=data['mid_temp'],
-                color=data['color'],
-                season=data['season']
+                category=data['category'],
+                season=data['season'],
+                image=data['picture']
             )
             db.session.add(new_clothes)
             db.session.commit()
@@ -227,10 +227,10 @@ class ClothesByID(Resource):
         if clothes:
             data = request.get_json()
             clothes.clothes_id = data['clothes_id']
-            clothes.max_temp = data['max_temp']
-            clothes.mid_temp = data['mid_temp']
-            clothes.color = data['color']
+            clothes.category = data['category']
             clothes.season = data['season']
+            clothes.image = data['image']
+
             db.session.add(clothes)
             db.session.commit()
             return make_response(clothes.to_dict(), 200)
@@ -306,7 +306,7 @@ api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
 api.add_resource(Closet, '/closets')
 api.add_resource(ClosetByID, '/closets/<int:id>')
-api.add_resource(Clothes, '/clothes')
+api.add_resource(ClothesResource, '/clothes')
 api.add_resource(ClothesByID, '/clothes/<int:id>')
 api.add_resource(History, '/history')
 api.add_resource(HistoryByID, '/history/<int:id>')

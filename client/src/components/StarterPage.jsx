@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from 'react'
 import { Link } from 'react-router-dom';
 
 function IconHandshake(props) {
@@ -26,8 +26,34 @@ function StarterPage() {
         justifyContent: 'center',
         margin: 'auto',
         padding: 'auto',
+        
       }}
     >
+      <style>
+        {`
+          @keyframes easeOutLineLeft {
+            from {
+              width: 0%;
+              margin-left: 0;
+            }
+            to {
+              width: 5000%;
+              margin-left: '-750px';
+            }
+          }
+
+          @keyframes easeOutLineRight {
+            from {
+              width: 0%;
+              margin-right: 0;
+            }
+            to {
+              width: 5000%;
+              margin-right: '-7500px';
+            }
+          }
+        `}
+      </style>
       <Link
         to="/login"
         id="starterLogo"
@@ -39,6 +65,8 @@ function StarterPage() {
           textDecoration: 'none',
           position: 'relative',
           margin: '0',
+          backgroundColor: 'purple'
+
         }}
       >
         <IconHandshake style={{ fontSize: '3em', margin: '0' }} />
@@ -50,6 +78,7 @@ function StarterPage() {
             fontSize: '2em',
             color: 'black',
             margin: '0',
+            
           }}
         >
           StyleMate
@@ -66,7 +95,8 @@ function StarterPage() {
             height: '85px',  // Increase the height for thicker lines
             background: 'black',
             zIndex: -1,
-            marginLeft: '-750px', // Move the line outside the border
+            marginLeft: '-750px',
+            animation: 'easeOutLineLeft 2s forwards'
           }}
         ></span>
         <span
@@ -82,10 +112,13 @@ function StarterPage() {
             background: 'black',
             zIndex: -1,
             marginRight: '-750px',
+            animation: 'easeOutLineRight 2s forwards'
           }}
         ></span>
       </Link>
     </div>
+
+
   );
 }
 

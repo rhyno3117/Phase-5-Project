@@ -9,8 +9,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 
-function Login() {
-  const [user, setUser] = useState('');
+function Login({setUser}) {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(user);
+    console.log(username);
     console.log(password);
 
     fetch("/api/login", {
@@ -27,7 +27,7 @@ function Login() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user,
+        username,
         password,
       }),
     })
@@ -38,7 +38,7 @@ function Login() {
         return response.json();
       })
       .then(data => {
-        setUser(data);
+        setUsername(data);
         navigate('/UploadCloset');
       })
       .catch(error => {
@@ -52,6 +52,7 @@ function Login() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      marginLeft: '18%',
     }}>
       <Box
         sx={{
@@ -106,7 +107,7 @@ function Login() {
                   name="username"
                   autoComplete="username"
                   autoFocus
-                  onChange={(e) => setUser(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <TextField
                   margin="normal"
