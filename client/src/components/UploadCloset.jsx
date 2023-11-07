@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InfoBox from './InfoBox';
-import UploadFitBigBox from './UploadFitBigBox';
+import UploadWidget from './UploadWidget';
 import Navbar from './Navbar';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function UploadCloset() {
-  const words = ['Tops', 'Bottoms', 'Lower', 'Socks', 'Shoes', 'Accessories'];
+  const words = ['Tops', 'Bottoms', 'Socks', 'Shoes', 'Accessories'];
   const [selectedCategory, setSelectedCategory] = useState('');
   const [bigBoxText, setBigBoxText] = useState('');
   const [picture, setPicture] = useState('');
   const [season, setSeason] = useState('');
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
+  const [imageReset, setImageReset] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
 
   const handleCategorySelection = (category) => {
     setSelectedCategory(category);
     setBigBoxText(category);
+  };
+
+  const handleResetImage = () => {
+    setPicture('');
+    setImageReset(true);
+    console.log("Image resetting");
+  };
+
+  const handleResetClick = () => {
+    setUploadedImage(null); 
+    handleResetImage();
+    setSubmissionSuccess(false); 
   };
 
   const handleSubmit = () => {
@@ -23,6 +37,7 @@ function UploadCloset() {
       picture: picture,
       season: season,
     };
+    console.log('Data to be submitted:', postData);
 
     fetch('/api/clothes', {
       method: 'POST',
@@ -44,6 +59,8 @@ function UploadCloset() {
       });
   };
 
+  
+    
   return (
     <div>
       <Navbar />
@@ -57,17 +74,18 @@ function UploadCloset() {
           width: '100vw',
           margin: 'auto',
           padding: 'auto',
-          marginTop: '-200px',
+          marginTop: '-300px', // Adjust the marginTop
+          borderRadius: '10px',
         }}
       >
         <div
           style={{
             display: 'flex',
-            flexDirection: 'row',
             justifyContent: 'center',
             height: '100vh',
             width: '100vw',
-            marginTop: '-600px',
+            marginTop: '-400px', // Adjust the marginTop
+            borderRadius: '10px',
           }}
         >
           {words.map((word) => (
@@ -76,8 +94,8 @@ function UploadCloset() {
               style={{
                 marginTop: '50px',
                 padding: '20px',
-                width: '100px',
-                height: '0px',
+                width: '250px', 
+                height: '10px',
                 margin: '15px',
                 backgroundColor: word === selectedCategory ? 'yellow' : 'white',
                 display: 'flex',
@@ -85,9 +103,10 @@ function UploadCloset() {
                 justifyContent: 'center',
                 fontWeight: 'bold',
                 fontFamily: 'Arial, sans-serif',
-                fontSize: '1em',
+                fontSize: '2em', // Increase the fontSize
                 color: word === selectedCategory ? 'black' : 'black',
-                border: '2px solid black',
+                border: '3px solid black', // Increase the border size
+                borderRadius: '10px',
               }}
               onClick={() => handleCategorySelection(word)}
             >
@@ -95,12 +114,14 @@ function UploadCloset() {
             </div>
           ))}
         </div>
-        <UploadFitBigBox
+        <UploadWidget
           handleCategorySelection={handleCategorySelection}
           category={selectedCategory}
           bigBoxText={bigBoxText}
           setPicture={setPicture}
           setSeason={setSeason}
+          setSelectedCategory={setSelectedCategory}
+          handleResetImage={handleResetImage}
         />
         <div
           style={{
@@ -108,28 +129,41 @@ function UploadCloset() {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: '20px',
+            marginBottom: '20px', // Add a margin at the bottom
+            borderRadius: '10px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '-1350px', marginRight: '-470px' }}>
             {submissionSuccess ? (
-              <CheckCircleIcon style={{ color: 'green', marginRight: '10px', marginTop: '-1000px' }} />
+              <CheckCircleIcon style={{ color: 'green', marginRight: '10px' }} />
             ) : null}
             <button
               style={{
-                marginTop: '-1000px',
-                display: 'flex',
-                padding: '10px 20px',
                 fontSize: '1em',
                 fontWeight: 'bold',
                 backgroundColor: 'purple',
                 color: 'white',
-                border: 'none',
                 cursor: 'pointer',
                 border: '3px solid #000',
+                borderRadius: '10px',
               }}
-              onClick={handleSubmit}
+              onClick={() => handleSubmit()}
             >
               Submit Clothing
+            </button>
+            <button
+              style={{
+                fontSize: '1em',
+                fontWeight: 'bold',
+                backgroundColor: 'red',
+                color: 'white',
+                cursor: 'pointer',
+                border: '3px solid #000',
+                borderRadius: '10px',
+              }}
+              onClick={handleResetClick}
+            >
+              Reset
             </button>
           </div>
         </div>

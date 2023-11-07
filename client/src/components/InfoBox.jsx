@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-function InfoBox({ handleCategorySelection, bigBoxText }) {
+function InfoBox({ setSelectedCategory,handleCategorySelection, bigBoxText, setSeason, selectedCategory }) {
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
-    console.log(selectedCategory);
-    handleCategorySelection(selectedCategory);
+    setSelectedCategory(selectedCategory);
+    // console.log(selectedCategory);
+    // handleCategorySelection(selectedCategory);
   };
 
   const handleSeasonChange = (event) => {
     const selectedSeason = event.target.value;
-    console.log(selectedSeason);
-    handleCategorySelection(selectedSeason);
+    setSeason(selectedSeason);
   };
 
   const infoBoxStyle = {
@@ -23,6 +23,7 @@ function InfoBox({ handleCategorySelection, bigBoxText }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: '10px',
   };
 
   const centeredContainerStyle = {
@@ -37,6 +38,7 @@ function InfoBox({ handleCategorySelection, bigBoxText }) {
     width: '100%',
     borderTop: '3px solid black',
     margin: '5px 0',
+    borderRadius: '10px',
   };
 
   const labelStyle = {
@@ -47,25 +49,25 @@ function InfoBox({ handleCategorySelection, bigBoxText }) {
   const dropdownStyle = {
     width: '100%',
     padding: '5px',
+    borderRadius: '10px',
   };
 
   return (
     <div className="info-box" style={infoBoxStyle}>
       <div style={centeredContainerStyle}>
-        <div style={{ ...headerStyle, color: 'black', fontSize: '28px', fontWeight: 'bold' }}>Insert Text</div>
+        <div style={{ ...headerStyle, color: 'black', fontSize: '40px', fontWeight: 'bold', marginTop: '-50px' }}>Select Text</div>
         <hr style={lineStyle} />
         <div style={{ ...labelStyle, color: 'black', fontWeight: 'bold'}}>Season:</div>
-        <select style={dropdownStyle}>
+        <select style={dropdownStyle} onChange={handleSeasonChange}>
           <option value="spring">Spring</option>
           <option value="summer">Summer</option>
           <option value="fall">Fall</option>
           <option value="winter">Winter</option>
         </select>
         <div style={{ ...labelStyle, color: 'black', fontWeight: 'bold' }}>Category:</div>
-        <select style={dropdownStyle} onChange={handleCategoryChange} value={bigBoxText}>
+        <select style={dropdownStyle} onChange={handleCategoryChange}>
           <option value="tops">Tops</option>
           <option value="bottoms">Bottoms</option>
-          <option value="lower">Lower</option>
           <option value="socks">Socks</option>
           <option value="shoes">Shoes</option>
           <option value="accessories">Accessories</option>

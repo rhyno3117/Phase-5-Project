@@ -30,36 +30,36 @@ function Weather() {
     <div
       id="weather"
       style={{
-        marginRight:'300px',
         display: 'flex',
-        margin: '0',
+        // marginTop: '-900px',
         justifyContent: 'center',
         padding: '120px',
-        border: '4px solid #000',
+        border: '10px solid #000',
         backgroundColor: '#f9f9f9',
-        height: '400px',
-        width: '100px',
+        height: '70vh',
+        width: '30vh',
         textAlign: 'center',
         alignItems: 'center',
+        borderRadius: '10px', // Apply rounded border to the outer div
+
         backgroundImage: 'url("https://img.freepik.com/premium-vector/day-with-clouds-weather-app-screen-mobile-interface-design-forecast-weather-background-time-concept-vector-banner_87946-4137.jpg")',
       }}
     >
       {weatherData ? (
         <div>
-          <h2 style={{ borderBottom: '4px solid #000', color: 'black', marginTop: '-100px', fontSize: '45px' }}>
+          <h2 style={{ borderBottom: '4px solid #000', color: 'black', marginTop: '-100px', fontSize: '55px' }}>
             Weather
           </h2>
-
-          <p style={{ fontWeight: 'bold', fontSize: '20px', color: 'black', marginTop: '100px' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '30px', color: 'black', marginTop: '100px' }}>
             Temperature: {convertCelsiusToFahrenheit(weatherData.main.temp)}°F
           </p>
-          <p style={{ fontWeight: 'bold', fontSize: '20px', color: 'black' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}>
             Max Temperature: {convertCelsiusToFahrenheit(weatherData.main.temp_max)}°F
           </p>
-          <p style={{ fontWeight: 'bold', fontSize: '20px', color: 'black' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}>
             Lowest Temperature: {convertCelsiusToFahrenheit(weatherData.main.temp_min)}°F
           </p>
-          <p style={{ fontWeight: 'bold', fontSize: '20px', color: 'black' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}>
             Humidity: {weatherData.main.humidity}%
           </p>
         </div>

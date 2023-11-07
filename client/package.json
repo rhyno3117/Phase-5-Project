@@ -18,6 +18,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.6",
     "react-router-dom": "^6.17.0",
     "react-swipe": "^6.0.4",
     "swipe-js-iso": "^2.1.5"

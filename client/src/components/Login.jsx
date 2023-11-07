@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 
-function Login({setUser}) {
+function Login({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,12 +33,14 @@ function Login({setUser}) {
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error("Network response error");
+          throw new ValueError("Network response error");
         }
         return response.json();
       })
       .then(data => {
-        setUsername(data);
+        console.log(data)
+        setUser(data)
+        setUsername(data.user);
         navigate('/UploadCloset');
       })
       .catch(error => {
@@ -46,18 +48,26 @@ function Login({setUser}) {
       });
   }
 
+  class ValueError extends Error {
+    constructor(message) {
+      super(message);
+      this.name = 'ValueError';
+    }
+  }
+
   return (
+    <div>
     <Container component="main" sx={{
       height: '80vh',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginLeft: '18%',
+      marginLeft: '40%',
     }}>
       <Box
         sx={{
           marginTop: 8,
-          width: '90vw'
+          width: '90vw',
         }}
       >
         <Grid container>
@@ -79,6 +89,9 @@ function Login({setUser}) {
             component={Paper}
             elevation={6}
             square
+            sx={{
+              borderRadius: '15px', // Rounded border
+            }}
           >
             <Box
               sx={{
@@ -142,6 +155,7 @@ function Login({setUser}) {
         </Grid>
       </Box>
     </Container>
+    </div>
   );
 }
 

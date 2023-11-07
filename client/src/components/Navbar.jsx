@@ -15,7 +15,7 @@ function IconHandshake(props) {
   );
 }
 
-function Navbar() {
+function Navbar({setUser}) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate()
@@ -23,11 +23,10 @@ function Navbar() {
   function handleLogout() {
     fetch("/api/logout", {
       method: 'DELETE'
-    }).then(() => {
-      setUser(null);
     })
+    setUser(null);
     navigate('/')
-    ;
+
   }
 
   const toggleDropdown = () => {
@@ -45,6 +44,8 @@ function Navbar() {
           width: '100vw',
           height: '100vh',
           // backgroundColor: 'red'
+          borderRadius: '10px', // Apply rounded border to the outer div
+
         }}
       >
         
@@ -60,7 +61,9 @@ function Navbar() {
             position: 'relative',
             margin: '0px',
             top: '-350px',
-            backgroundColor: 'purple'
+            backgroundColor: 'purple',
+            borderRadius: '10px', // Apply rounded border to the outer div
+
           }}
         >
           <IconHandshake style={{ fontSize: '3em', margin: '0' }} />
@@ -72,6 +75,8 @@ function Navbar() {
               fontSize: '2em',
               color: 'black',
               margin: '0',
+              borderRadius: '10px', // Apply rounded border to the outer div
+
               
             }}
           >
@@ -89,6 +94,8 @@ function Navbar() {
               height: '85px',
               background: 'black',
               marginLeft: '-750px',
+              borderRadius: '10px', // Apply rounded border to the outer div
+
             }}
           ></span>
           <span
@@ -105,6 +112,8 @@ function Navbar() {
               marginRight: '-750px',
               display: 'flex',
               justifyContent: 'end',
+              borderRadius: '10px', // Apply rounded border to the outer div
+
             }}
           >
             <div
@@ -119,6 +128,8 @@ function Navbar() {
               position: 'absolute', 
               top: '10px',
               right: '10px',
+              borderRadius: '10px', // Apply rounded border to the outer div
+
               
             }}
           >
@@ -164,14 +175,15 @@ function Navbar() {
           </span>
         </div>
         <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-          }}
+          // style={{
+          //   display: 'flex',
+          //   flexDirection: 'column',
+          //   alignItems: 'flex-end',
+          //   position: 'absolute',
+          //   top: '10px',
+          //   right: '10px',
+            
+          // }}
         >
           
         </div>
