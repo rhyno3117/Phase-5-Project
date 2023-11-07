@@ -15,7 +15,7 @@ function IconHandshake(props) {
   );
 }
 
-function Navbar({setUser}) {
+function Navbar({ setUser }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate()
@@ -48,8 +48,8 @@ function Navbar({setUser}) {
 
         }}
       >
-        
-        
+
+
         <div
           id="starterLogo"
           style={{
@@ -77,7 +77,7 @@ function Navbar({setUser}) {
               margin: '0',
               borderRadius: '10px', // Apply rounded border to the outer div
 
-              
+
             }}
           >
             StyleMate
@@ -117,75 +117,73 @@ function Navbar({setUser}) {
             }}
           >
             <div
-            className="dropdown"
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}
-            style={{
-              height: '60px',
-              width: '80px',
-              backgroundColor: 'black',
-              cursor: 'pointer',
-              position: 'absolute', 
-              top: '10px',
-              right: '10px',
-              borderRadius: '10px', // Apply rounded border to the outer div
-
-              
-            }}
-          >
-            <svg
-              height="80"
-              width="80"
-              viewBox="0 0 512 512"
-              fill="black"
-              xmlns="http://www.w3.org/2000/svg"
+              className="dropdown"
+              onClick={() => setDropdownOpen(!isDropdownOpen)}
+              style={{
+                height: '60px',
+                width: '80px',
+                backgroundColor: 'black',
+                cursor: 'pointer',
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                borderRadius: '10px', // Apply rounded border to the outer div
+                
+              }}
             >
-              <path
-                d="M80 320h352c8.84 0 16-7.16 16-16s-7.16-16-16-16H80c-8.84 0-16 7.16-16 16s7.16 16 16 16zm0-96h352c8.84 0 16-7.16 16-16s-7.16-16-16-16H80c-8.84 0-16 7.16-16 16s7.16 16 16 16zm0-96h352c8.84 0 16-7.16 16-16s-7.16-16-16-16H80c-8.84 0-16 7.16-16 16s7.16 16 16 16z"
-                stroke="purple"
-                strokeWidth="20"
-                strokeLinecap="square"
-              />
-            </svg>
-            {isDropdownOpen && (
-              <div className="dropdown-content">
-                {location.pathname !== '/MainPage' && (
-                  <Link to="/MainPage">
-                    <button>Create</button>
-                  </Link>
-                )}
-                {location.pathname !== '/MePage' && (
-                  <Link to="/MePage">
-                    <button>Me</button>
-                  </Link>
-                )}
-                {location.pathname !== '/UploadCloset' && (
-                  <Link to="/UploadCloset">
-                    <button>Upload</button>
-                  </Link>
-                )}
-                {location.pathname !== '/' && (
-                  <Link to="/">
-                    <button onClick={handleLogout}>Logout</button>
-                  </Link>
-                )}
-              </div>
-            )}
-          </div>
+              <svg
+                height="80"
+                width="80"
+                viewBox="0 0 512 512"
+                fill="black"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M80 320h352c8.84 0 16-7.16 16-16s-7.16-16-16-16H80c-8.84 0-16 7.16-16 16s7.16 16 16 16zm0-96h352c8.84 0 16-7.16 16-16s-7.16-16-16-16H80c-8.84 0-16 7.16-16 16s7.16 16 16 16zm0-96h352c8.84 0 16-7.16 16-16s-7.16-16-16-16H80c-8.84 0-16 7.16-16 16s7.16 16 16 16z"
+                  stroke="purple"
+                  strokeWidth="20"
+                  strokeLinecap="square"
+                />
+              </svg>
+              {isDropdownOpen && (
+                <div className="dropdown-content">
+                  {location.pathname !== '/MainPage' && (
+                    <Link to="/MainPage">
+                      <button>Create</button>
+                    </Link>
+                  )}
+                  {location.pathname !== '/MePage' && (
+                    <Link to="/MePage">
+                      <button>Me</button>
+                    </Link>
+                  )}
+                  {location.pathname !== '/UploadCloset' && (
+                    <Link to="/UploadCloset">
+                      <button>Upload</button>
+                    </Link>
+                  )}
+                  {location.pathname !== '/' && (
+                    <Link to="/">
+                      <button onClick={handleLogout}>Logout</button>
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
           </span>
         </div>
         <div
-          // style={{
-          //   display: 'flex',
-          //   flexDirection: 'column',
-          //   alignItems: 'flex-end',
-          //   position: 'absolute',
-          //   top: '10px',
-          //   right: '10px',
-            
-          // }}
+        // style={{
+        //   display: 'flex',
+        //   flexDirection: 'column',
+        //   alignItems: 'flex-end',
+        //   position: 'absolute',
+        //   top: '10px',
+        //   right: '10px',
+
+        // }}
         >
-          
+
         </div>
       </div>
     </>

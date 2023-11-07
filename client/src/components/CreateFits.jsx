@@ -2,32 +2,37 @@ import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.css';
 
-function CreateFits({ user, setUser, clothes, setClothes, clothesData, setClothesData }) {
+function CreateFits({setSelectedTopImage,setSelectedBottomImage,setSelectedSocksImage,setSelectedShoesImage,setSelectedAccessoriesImage, setSelectedId, setSelectedImage}) {
   const [categoryImage, setCategoryImage] = useState([]);
-  
 
   function fun(index, photo) {
-    console.log(index);
-    console.log(photo);
+    console.log(photo)
+    setSelectedId(index);
+    setSelectedImage(photo);
+    setSelectedTopImage(photo);
+    setSelectedBottomImage(photo);
+    setSelectedSocksImage(photo);
+    setSelectedShoesImage(photo);
+    setSelectedAccessoriesImage(photo);
+    console.log(index, photo)
   }
 
   const carouselContainerStyle = {
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     height: '400px',
     width: '400px',
     border: '5px solid black',
     overflow: 'hidden',
-    margin: '2px',
-  
-
+    margin: '4px',
   };
 
   const containerStyle = {
-    width: '100px',
-    // display: 'flex',
+    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginLeft: '45px'
+    marginLeft: '50px',
   };
 
   useEffect(() => {
@@ -41,7 +46,6 @@ function CreateFits({ user, setUser, clothes, setClothes, clothesData, setClothe
         }
       })
       .then((data) => {
-        // set the data here
         console.log(data);
         setCategoryImage(data);
       })
@@ -50,77 +54,30 @@ function CreateFits({ user, setUser, clothes, setClothes, clothesData, setClothe
       });
   }, []);
 
-  const topCategoryImages = categoryImage.filter((clothes) => clothes.category === 'Tops');
-
-  const bottomsCategoryImages = categoryImage.filter((clothes) => clothes.category === 'bottoms');
-  const socksCategoryImages = categoryImage.filter((clothes) => clothes.category === 'socks');
-  const shoesCategoryImages = categoryImage.filter((clothes) => clothes.category === 'shoes');
-  // console.log(shoesCategoryImages)
-  const accessoriesCategoryImages = categoryImage.filter((clothes) => clothes.category === 'accessories');
-
+  const categoryNames = ['Tops', 'bottoms', 'socks', 'shoes', 'accessories'];
 
   return (
     <div style={containerStyle}>
-      <div id="carousel-container-tops" style={carouselContainerStyle}>
-        <Carousel>
-          {topCategoryImages.map((clothes, index) => (
-            <Carousel.Item key={index}>
-              <img src={clothes.image} onClick={() => fun(index, clothes.image)} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
+      {categoryNames.map((category) => (
+        <div key={category} style={{ display: 'flex', alignItems: 'center' }}>
+          <div id={`carousel-container-${category}`} style={carouselContainerStyle}>
+            <Carousel>
+              {categoryImage
+                .filter((clothes) => clothes.category === category)
+                .map((clothes, index) => (
+                  <Carousel.Item key={index}>
+                    <img src={clothes.image} onClick={() => fun(index, clothes.image)} />
+                  </Carousel.Item>
+                ))}
+            </Carousel>
+          </div>
+          <div >
+              <img
+                src="https://t4.ftcdn.net/jpg/05/30/79/15/360_F_530791557_T8hNharBQQJqmw0R2FRjCrC9CgNwaeui.jpg"
+              />
+          </div>
         </div>
-
-      <div id="carousel-container-bottoms" style={carouselContainerStyle}>
-        <Carousel>
-          {bottomsCategoryImages.map((clothes, index) => (
-            <Carousel.Item key={index}>
-              <img
-                src={clothes.image}
-                onClick={() => fun(index, clothes.image)} 
-              />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </div>
-      <div id="carousel-container-socks" style={carouselContainerStyle}>
-        <Carousel>
-          {socksCategoryImages.map((clothes, index) => (
-            <Carousel.Item key={index}>
-              <img
-                src={clothes.image}
-                onClick={() => fun(index, clothes.image)} 
-              />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </div>
-
-      <div id="carousel-container-shoes" style={carouselContainerStyle}>
-        <Carousel>
-          {shoesCategoryImages.map((clothes, index) => (
-            <Carousel.Item key={index}>
-              <img
-                src={clothes.image}
-                onClick={() => fun(index, clothes.image)} 
-              />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </div>
-
-      <div id="carousel-container-accessories" style={carouselContainerStyle}>
-        <Carousel>
-          {accessoriesCategoryImages.map((clothes, index) => (
-            <Carousel.Item key={index}>
-              <img
-                src={clothes.image}
-                onClick={() => fun(index, clothes.image)} 
-              />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </div>
+      ))}
     </div>
   );
 }

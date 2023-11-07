@@ -4,7 +4,7 @@ import UploadWidget from './UploadWidget';
 import Navbar from './Navbar';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-function UploadCloset() {
+function UploadCloset({user}) {
   const words = ['Tops', 'Bottoms', 'Socks', 'Shoes', 'Accessories'];
   const [selectedCategory, setSelectedCategory] = useState('');
   const [bigBoxText, setBigBoxText] = useState('');
@@ -36,6 +36,7 @@ function UploadCloset() {
       category: selectedCategory,
       picture: picture,
       season: season,
+      user_id: user.id,
     };
     console.log('Data to be submitted:', postData);
 

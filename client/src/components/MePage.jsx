@@ -3,9 +3,6 @@ import Navbar from './Navbar';
 import { TextField, Button, Box } from '@mui/material';
 import ImageCard from './ImageCard';
 import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import Typography from '@mui/material/Typography';
-// import CardActions from '@mui/material/CardActions';
 
 function MePage({ setUser, user }) {
   const [images, setImages] = useState([]);
@@ -57,7 +54,6 @@ function MePage({ setUser, user }) {
         return null;
       }
     })
-
       .then((data) => {
         setImages(data.map((item) => item));
       })
@@ -120,12 +116,12 @@ function MePage({ setUser, user }) {
   const boxMe = {
     borderRadius: '50%',
     border: '15px solid #000',
-    width: '55vh',
-    height: '55vh',
+    width: '700px',
+    height: '700px',
     padding: '10px',
     marginTop: '-800px',
     position: 'relative',
-    marginLeft: '40vh'
+    marginLeft: '40vh',
   };
 
   const meStyle = {
@@ -159,7 +155,6 @@ function MePage({ setUser, user }) {
       <div>
         <Navbar />
       </div>
-      
       <div>
         <div>
           <div id="mebox" style={boxMe}>
@@ -210,18 +205,18 @@ function MePage({ setUser, user }) {
             marginLeft: '1500px',
             marginTop: '-600px',
             borderRadius: '10px', // You can adjust the radius value as needed
-            }}>
-          <div id="cards">
-            {images.map((image, index) => (
-              <ImageCard
-                key={index}
-                image={image.image}
-                id={image.id}
-                isEditing={editMode}
-                deleteClothes={deleteClothes}
-              />
-            ))}
-          </div>
+          }}>
+            <div id="cards">
+              {images.map((image, index) => (
+                <ImageCard
+                  key={index}
+                  image={image.image}
+                  id={image.id}
+                  isEditing={editMode}
+                  deleteClothes={deleteClothes}
+                />
+              ))}
+            </div>
           </Card>
         </div>
       </div>

@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Weather from './Weather';
 import CreateFits from './CreateFits';
-import SetFits from './SetFits';
+// import SetFits from './SetFits';
 import CompleteFits from './CompleteFits';
 
 function MainPage({ user, setUser, clothes, setClothes, clothesData, setClothesData }) {
+  const [selectedImage, setSelectedImage] = useState([]);
+  const [selectedId, setSelectedId] = useState([]);
+
+  const [selectedTopImage, setSelectedTopImage] = useState([]);
+  const [selectedBottomImage, setSelectedBottomImage] = useState([]);
+  const [selectedSocksImage, setSelectedSocksImage] = useState([]);
+  const [selectedShoesImage, setSelectedShoesImage] = useState([]);
+  const [selectedAccesoriesImage, setSelectedAccessoriesImage] = useState([]);
+  console.log(selectedShoesImage)
+
+
+  const updateSelectedImage = (image, id) => {
+    console.log(image,id)
+    setSelectedImage(image);
+    setSelectedId(id);
+  };
+
   const containerStyle = {
     display: 'flex',
-    marginTop: '-200px',
+    marginTop: '-150px',
     alignItems: 'center',
     justifyContent: 'space-between',
     position: 'absolute',
@@ -30,13 +47,10 @@ function MainPage({ user, setUser, clothes, setClothes, clothesData, setClothesD
       </div>
       <div style={containerStyle}>
         <div id="carousel" style={componentStyle}>
-          <CreateFits setUser={setUser} clothes={clothes} setClothes={setClothes} setClothesData={setClothesData} user={user} clothesData={clothesData} />
-        </div>
-        <div id="confirm" style={componentStyle}>
-          <SetFits />
+          <CreateFits setSelectedAccessoriesImage={setSelectedAccessoriesImage} setSelectedSocksImage={setSelectedSocksImage} setSelectedBottomImage={setSelectedBottomImage} setSelectedTopImage={setSelectedTopImage} setSelectedId={setSelectedId} setSelectedImage={setSelectedImage} updateSelectedImage={updateSelectedImage} setUser={setUser} clothes={clothes} setClothes={setClothes} setClothesData={setClothesData} user={user} clothesData={clothesData} setSelectedShoesImage={setSelectedShoesImage}/>
         </div>
         <div id="complete" style={componentStyle}>
-          <CompleteFits />
+          <CompleteFits selectedAccesoriesImage={selectedAccesoriesImage} selectedShoesImage={selectedShoesImage} selectedSocksImage={selectedSocksImage} selectedBottomImage={selectedBottomImage} selectedTopImage={selectedTopImage} selectedImage={selectedImage} selectedId={selectedId}/>
         </div>
       </div>
     </div>

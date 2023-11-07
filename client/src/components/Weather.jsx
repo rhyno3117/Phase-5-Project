@@ -31,16 +31,17 @@ function Weather() {
       id="weather"
       style={{
         display: 'flex',
-        // marginTop: '-900px',
+        marginTop: '-740px',
         justifyContent: 'center',
         padding: '120px',
         border: '10px solid #000',
         backgroundColor: '#f9f9f9',
-        height: '70vh',
-        width: '30vh',
+        height: '800px',
+        width: '100px',
         textAlign: 'center',
         alignItems: 'center',
         borderRadius: '10px', // Apply rounded border to the outer div
+        marginLeft: '2025px',
 
         backgroundImage: 'url("https://img.freepik.com/premium-vector/day-with-clouds-weather-app-screen-mobile-interface-design-forecast-weather-background-time-concept-vector-banner_87946-4137.jpg")',
       }}

@@ -43,7 +43,7 @@ function App() {
         <Route path="/NavBar" element={<Navbar setUser={setUser} />} />
         <Route path="/Login" element={<Login setUser={setUser} />} />
         <Route path="/Signup" element={<Signup setUser={setUser} />} />
-        <Route path="/UploadCloset" element={<UploadCloset />} />
+        <Route path="/UploadCloset" element={<UploadCloset user={user}/>} />
         <Route path="/MainPage" element={<MainPage setUser={setUser} clothes={clothes} setClothes={setClothes} setClothesData={setClothesData} user={user} clothesData={clothesData}/>} />
         <Route path="/MePage" element={<MePage setUser={setUser} user={user} clothes={clothes} setClothes={setClothes} setClothesData={setClothesData} clothesData={clothesData} />} />
       </Routes>
