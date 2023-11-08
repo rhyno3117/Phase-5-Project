@@ -206,7 +206,8 @@ class ClothesResource(Resource):
             new_clothes = Clothes(
                 category=data['category'],
                 season=data['season'],
-                image=data['picture']
+                image=data['picture'],
+                user_id=data['user_id']
             )
             db.session.add(new_clothes)
             db.session.commit()
@@ -227,6 +228,7 @@ class ClothesByID(Resource):
         if clothes:
             data = request.get_json()
             clothes.clothes_id = data['clothes_id']
+            clothes.user_id = data['user_id']
             clothes.category = data['category']
             clothes.season = data['season']
             clothes.image = data['image']

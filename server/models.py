@@ -14,6 +14,7 @@ class User( db.Model, SerializerMixin):
 
     closet = db.relationship('Closet', backref='user')
     history = db.relationship('History', backref='user')
+    clothes = db.relationship('Clothes', backref='user')
 
     @hybrid_property
     def password_hash(self):
@@ -56,12 +57,14 @@ class Clothes( db.Model, SerializerMixin):
     __tablename__ ="clothes_table"
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_table.id'))
     category = db.Column(db.String)
     season = db.Column(db.String)
     image = db.Column(db.String)
 
     closet = db.relationship('Closet', backref='clothes')
-    History = db.relationship('History', backref='clothes')
+    history = db.relationship('History', backref='clothes')
+    serialize_rules=('-user','-closet', '-history')
 
 #////////////////////////////////////////////////
 class History(db.Model, SerializerMixin):
@@ -73,7 +76,7 @@ class History(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey("user_table.id"))
     date = db.Column(db.Integer)
 
-    serialize_rules=('-user','-clothes', 'event')
+    serialize_rules=('-user','-clothes', '-event')
 
 #/////////////////////////////////////////////////////////////////////
 #Password
