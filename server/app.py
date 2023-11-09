@@ -110,7 +110,12 @@ class Event(Resource):
         data = request.get_json()
         try:
             new_event = Event(
-                title=data['title']
+                title=data['title'],
+                tops=data['tops'],
+                bottoms=data['bottoms'],
+                socks=data['socks'],
+                shoes=data['shoes'],
+                accessories=data['accessories']
             )
             db.session.add(new_event)
             db.session.commit()

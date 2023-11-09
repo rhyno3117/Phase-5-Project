@@ -38,6 +38,11 @@ class Event( db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
+    tops =  db.Column(db.String, nullable=False)
+    bottoms = db.Column(db.String, nullable = False)
+    socks = db.Column(db.String, nullable = False)
+    shoes = db.Column(db.String, nullable = False)
+    accessories = db.Column(db.String, nullable = False)
 
     history = db.relationship('History', backref='event')
 
